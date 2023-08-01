@@ -7,11 +7,12 @@ import { SearchAdvice } from "./components/SearchAdvice";
 export type adviceSlip = {
   slip: {
     slip_id: number;
-    advice: string;
+    advice: string | undefined;
   };
 }& Partial<searchAdvice>;
 
 type advice = {
+  id: number;
   advice: string;
 }
 export type searchAdvice = {

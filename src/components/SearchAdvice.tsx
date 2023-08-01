@@ -12,26 +12,28 @@ export const SearchAdvice = ({
   handleSearchAdvice,
 }: SearchAdviceProps) => {
   const [search, setSearch] = useState("");
-  const [searchResult, setSearchResult] = useState<searchAdvice>();
-
   const handleSearch = () => {
-    if (search.length == 0){console.log("FUCK"); return;}
-    searchAdviceFetch(url, search)
-      .then((data: searchAdvice) => {console.log(data); setSearchResult(data);})
-      .catch((e) => console.log(e));
-    console.log(searchResult)
-    if(searchResult && searchResult.total_results > 0){
-        const totalResultCounts = searchResult.total_results;
-        const randomIndex = Math.floor(Math.random() * totalResultCounts);
-        const result = searchResult.slips[randomIndex]
-        handleSearchAdvice({
-            slip: { slip_id: randomIndex, advice: result.advice },
-          })
-    }else{
-        handleSearchAdvice({
-            slip: { slip_id: 0, advice: searchResult!.message!.text },
-          })
+    if (search.length == 0) {
+      return;
     }
+    searchAdviceFetch(url, search)
+      .then((data: searchAdvice) => {
+        console.log(data);
+        if (data && data.total_results > 0) {
+          const totalResultCounts = data.total_results;
+          const randomIndex = Math.floor(Math.random() * totalResultCounts);
+          const result = data.slips[randomIndex];
+          handleSearchAdvice({
+            slip: { slip_id: result.id, advice: result.advice },
+          });
+        } else {
+          handleSearchAdvice({
+            slip: { slip_id: 0, advice: data?.message?.text },
+          });
+        }
+      })
+      .catch((e) => console.log(e));
+
     setSearch("");
   };
 
@@ -41,15 +43,15 @@ export const SearchAdvice = ({
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            handleSearch();           
+            handleSearch();
           }}
         >
           <Form.Control
             className=""
             value={search}
-            onChange={(e) =>{
-                e.preventDefault();
-                setSearch(e.target.value);
+            onChange={(e) => {
+              e.preventDefault();
+              setSearch(e.target.value);
             }}
           ></Form.Control>
         </Form>

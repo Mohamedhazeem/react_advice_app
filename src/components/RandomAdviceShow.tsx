@@ -3,7 +3,7 @@ import "./randomAdvice.css";
 import { useState } from "react";
 
 type RandomAdviceProps = {
-  advice:  string;
+  advice:  string| undefined;
   getAdvice: () => void;
 };
 
