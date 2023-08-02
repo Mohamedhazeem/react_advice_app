@@ -9,25 +9,25 @@ export type adviceSlip = {
     slip_id: number;
     advice: string | undefined;
   };
-}& Partial<searchAdvice>;
+} & Partial<searchAdvice>;
 
 type advice = {
   id: number;
   advice: string;
-}
+};
 export type searchAdvice = {
-  total_results: number
-    slips: advice[]
+  total_results: number;
+  slips: advice[];
 } & Partial<message>;
 
 type message = {
   message: {
-    type: string
-    text: string
-  }
-}
+    type: string;
+    text: string;
+  };
+};
 const randomAdviceURL = "https://api.adviceslip.com/advice";
-const searchAdviceURL = "https://api.adviceslip.com/advice/search/"
+const searchAdviceURL = "https://api.adviceslip.com/advice/search/";
 function App() {
   const [randomAdvice, setRandomAdvice] = useState<adviceSlip>(() => {
     return { slip: { slip_id: 0, advice: "Loading..." } };
@@ -51,7 +51,10 @@ function App() {
   }
   return (
     <>
-      <SearchAdvice url={searchAdviceURL} handleSearchAdvice={setRandomAdvice}/>
+      <SearchAdvice
+        url={searchAdviceURL}
+        handleSearchAdvice={setRandomAdvice}
+      />
       <RandomAdviceShow
         advice={randomAdvice.slip.advice}
         getAdvice={getRandomAdvice}
