@@ -1,5 +1,5 @@
 import { Button } from "react-bootstrap";
-import "./randomAdvice.css";
+import "./advice.css";
 import { useState } from "react";
 
 type RandomAdviceProps = {

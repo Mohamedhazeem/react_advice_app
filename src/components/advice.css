@@ -1,6 +1,6 @@
 
 .advice-container{
-    background-color: aqua;
+    background-color: rgb(211, 209, 255);
     transform: translate(-50%,-50%);
     display: flex;
     flex-direction: column;
@@ -10,4 +10,9 @@
     max-width: 70%;
     min-height: 25%;
     max-height: 85%;
+}
+.form-holder{
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%,-10%);
 }

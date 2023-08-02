@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Form } from "react-bootstrap";
 import { searchAdviceFetch } from "../lib/fetch";
 import { adviceSlip, searchAdvice } from "../App";
+import "./advice.css";
 type SearchAdviceProps = {
   url: string;
   handleSearchAdvice: (advice: adviceSlip) => void;
@@ -40,15 +41,16 @@ export const SearchAdvice = ({
   return (
     <>
       <div>
-        <Form
+        <Form className="w-25 position-absolute border border-black rounded-2 form-holder"
           onSubmit={(e) => {
             e.preventDefault();
             handleSearch();
           }}
         >
           <Form.Control
-            className=""
+            className="shadow-none"
             value={search}
+            placeholder="Search..."
             onChange={(e) => {
               e.preventDefault();
               setSearch(e.target.value);
